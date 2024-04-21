@@ -4,11 +4,12 @@ import com.saito.payment.application.core.domain.Payment;
 import com.saito.payment.application.core.domain.Sale;
 import com.saito.payment.application.core.domain.enums.SaleEvent;
 import com.saito.payment.application.ports.in.FindUserByIdInputPort;
+import com.saito.payment.application.ports.in.SalePaymentInputPort;
 import com.saito.payment.application.ports.out.SavePaymentOutputPort;
 import com.saito.payment.application.ports.out.SendValidatedPaymentOutputPort;
 import com.saito.payment.application.ports.out.UpdateUserOutputPort;
 
-public class SalePaymentUseCase {
+public class SalePaymentUseCase implements SalePaymentInputPort {
     private final FindUserByIdInputPort findUserByIdInputPort;
     private final UpdateUserOutputPort updateUserOutputPort;
     private final SavePaymentOutputPort savePaymentOutputPort;
@@ -25,6 +26,7 @@ public class SalePaymentUseCase {
         this.sendValidatedPaymentOutputPort = sendValidatedPaymentOutputPort;
     }
 
+    @Override
     public void payment(Sale aSale){
         var user = findUserByIdInputPort.find(aSale.getUserId());
         if(user.getBalance().compareTo(aSale.getValue()) < 0){
