@@ -3,13 +3,13 @@ package com.saito.payment.adapters.out;
 import com.saito.payment.adapters.out.message.SaleMessage;
 import com.saito.payment.application.core.domain.Sale;
 import com.saito.payment.application.core.domain.enums.SaleEvent;
-import com.saito.payment.application.ports.out.SendValidatedPaymentOutputPort;
+import com.saito.payment.application.ports.out.SendToKafkaOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SendValidatedPaymentAdapter implements SendValidatedPaymentOutputPort {
+public class SendVToKafkaAdapter implements SendToKafkaOutputPort {
 
     @Autowired
     private KafkaTemplate<String, SaleMessage> kafkaTemplate;
